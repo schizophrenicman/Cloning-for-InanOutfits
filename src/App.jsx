@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import SignupModal from './components/SignupModal';
 import HeroSection from './components/HeroSection';
+import TrendingClothes from './components/TrendingClothes';
 
 function App() {
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -19,6 +20,7 @@ function App() {
       <Header onSignupClick={handleSignupClick} />
       <main>
         <HeroSection />
+        <TrendingClothes />
       </main>
       <SignupModal 
         isOpen={isSignupModalOpen} 
