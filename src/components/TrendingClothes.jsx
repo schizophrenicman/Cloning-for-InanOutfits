@@ -7,9 +7,9 @@ const TrendingClothes = () => {
   const trendingItems = [
     {
       id: 1,
-      name: "",
+      name: "Bag",
       price: "Nrs",
-      image: "",
+      image: "https://plus.unsplash.com/premium_photo-1678739395192-bfdd13322d34?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFnfGVufDB8fDB8fHww",
       category: ""
     },
     {
@@ -113,30 +113,30 @@ const TrendingClothes = () => {
                 key={item.id}
                 className="flex-none w-72 h-[480px] cursor-pointer transform transition-all duration-300 hover:scale-105"
               >
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
+                <div className="bg-gradient-to-t from-white to-yellow-100 rounded-xl shadow-xl overflow-hidden h-full flex flex-col border border-yellow-100">
                   <div className="relative flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.name}
                       className="w-full h-64 object-cover"
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        Trending
-                      </span>
+                    <div className="absolute top-4 right-4">
+                      <button className="bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                         Trending
+                      </button>
                     </div>
                   </div>
                   <div className="p-4 flex flex-col flex-grow">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h3 className="text-lg font-semibold text-yellow-900 mb-1">
                       {item.name || 'Product Name'}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-2">{item.category || 'Category'}</p>
-                    <p className="text-xl font-bold text-gray-900 mb-4">
+                    <p className="text-sm text-yellow-700 mb-2">{item.category || 'Category'}</p>
+                    <p className="text-xl font-bold text-yellow-900 mb-4">
                       {item.price || 'Nrs 0'}
                     </p>
                     <div className="mt-auto">
                       <button 
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+                        className="w-full bg-gradient-to-r from-orange-400 to-amber-500 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:from-yellow-500 hover:to-amber-600 transform hover:-translate-y-0.5"
                         onClick={() => console.log(`Added ${item.name || 'Product'} to cart`)}
                       >
                         Add to Cart
@@ -149,16 +149,6 @@ const TrendingClothes = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 };
