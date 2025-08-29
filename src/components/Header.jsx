@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Search, Bell, ShoppingCart, Globe, User } from 'lucide-react';
 
 export default function Header({ onSignupClick }) {
+  const [isClothingDropdownOpen, setIsClothingDropdownOpen] = useState(false);
+
+  const clothingCategories = [
+    { name: "Tops", subcategories: ["T-Shirts", "Blouses", "Sweaters", "Tank Tops"] },
+    { name: "Bottoms", subcategories: ["Pants", "Jeans", "Shorts", "Skirts"] },
+    { name: "Dresses", subcategories: ["Casual Dresses", "Evening Dresses", "Summer Dresses"] },
+    { name: "Outerwear", subcategories: ["Jackets", "Coats", "Blazers", "Vests"] },
+    { name: "Activewear", subcategories: ["Leggings", "Sports Bras", "Workout Tops", "Athletic Shorts"] },
+    { name: "Accessories", subcategories: ["Bags", "Jewelry", "Hats", "Scarves", "Belts"] },
+    { name: "Footwear", subcategories: ["Sneakers", "Boots", "Sandals", "Heels"] },
+    { name: "Swimwear", subcategories: ["Bikinis", "One-Pieces", "Swim Shorts"] }
+  ];
+
   return (
     <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-amber-100 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,12 +64,50 @@ export default function Header({ onSignupClick }) {
         <nav className="flex items-center justify-between py-3 border-t border-amber-100">
           <div className="flex items-center space-x-8">
             <div className="relative group">
-              <button className="text-amber-700 hover:text-amber-900 transition-all duration-200 flex items-center font-medium">
+              <button 
+                className="text-amber-700 hover:text-amber-900 transition-all duration-200 flex items-center font-medium"
+                onMouseEnter={() => setIsClothingDropdownOpen(true)}
+                onMouseLeave={() => setIsClothingDropdownOpen(false)}
+              >
                 Clothing
                 <svg className="ml-1 w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
+              
+              {/* Clothing Dropdown Menu */}
+              {isClothingDropdownOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-amber-100 z-50"
+                  onMouseEnter={() => setIsClothingDropdownOpen(true)}
+                  onMouseLeave={() => setIsClothingDropdownOpen(false)}
+                >
+                  <div className="p-6">
+                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Shop by Category</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      {clothingCategories.map((category, index) => (
+                        <div key={index} className="group/category">
+                          <h4 className="font-medium text-amber-800 mb-2 group-hover/category:text-amber-600 transition-colors duration-200">
+                            {category.name}
+                          </h4>
+                          <ul className="space-y-1">
+                            {category.subcategories.map((subcategory, subIndex) => (
+                              <li key={subIndex}>
+                                <a 
+                                  href="#" 
+                                  className="text-sm text-amber-600 hover:text-amber-800 transition-colors duration-200 block py-1 px-2 rounded hover:bg-amber-50"
+                                >
+                                  {subcategory}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
             <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">New Arrivals</a>
             <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">Sale</a>
