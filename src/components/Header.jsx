@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Search, Bell, ShoppingCart, Globe, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header({ onSignupClick }) {
   const [isClothingDropdownOpen, setIsClothingDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const clothingCategories = [
     { name: "Tops", subcategories: ["T-Shirts", "Blouses", "Sweaters", "Tank Tops"] },
@@ -12,7 +14,8 @@ export default function Header({ onSignupClick }) {
     { name: "Activewear", subcategories: ["Leggings", "Sports Bras", "Workout Tops", "Athletic Shorts"] },
     { name: "Accessories", subcategories: ["Bags", "Jewelry", "Hats", "Scarves", "Belts"] },
     { name: "Footwear", subcategories: ["Sneakers", "Boots", "Sandals", "Heels"] },
-    { name: "Swimwear", subcategories: ["Bikinis", "One-Pieces", "Swim Shorts"] }
+    { name: "Swimwear", subcategories: ["Bikinis", "One-Pieces", "Swim Shorts"] },
+    { name: "Unisex", subcategories: ["T-Shirts", "Hoodies", "Sneakers", "Accessories"] }
   ];
 
   return (
@@ -44,7 +47,10 @@ export default function Header({ onSignupClick }) {
               <Bell className="w-5 h-5" />
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
             </button>
-            <button className="p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110">
+            <button 
+              onClick={() => navigate('/cart')}
+              className="p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110"
+            >
               <ShoppingCart className="w-5 h-5" />
             </button>
             <button 
@@ -78,16 +84,16 @@ export default function Header({ onSignupClick }) {
               {/* Clothing Dropdown Menu */}
               {isClothingDropdownOpen && (
                 <div 
-                  className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-amber-100 z-50"
+                  className="absolute top-full left-0 mt-1 w-80 bg-white rounded-md shadow-lg border border-amber-100 z-50"
                   onMouseEnter={() => setIsClothingDropdownOpen(true)}
                   onMouseLeave={() => setIsClothingDropdownOpen(false)}
                 >
-                  <div className="p-6">
-                    <h3 className="text-lg font-semibold text-amber-900 mb-4">Shop by Category</h3>
-                    <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4">
+                    <h3 className="text-base font-semibold text-amber-900 mb-3">Shop by Category</h3>
+                    <div className="grid grid-cols-2 gap-3">
                       {clothingCategories.map((category, index) => (
                         <div key={index} className="group/category">
-                          <h4 className="font-medium text-amber-800 mb-2 group-hover/category:text-amber-600 transition-colors duration-200">
+                          <h4 className="font-medium text-amber-800 mb-1.5 text-sm group-hover/category:text-amber-600 transition-colors duration-200">
                             {category.name}
                           </h4>
                           <ul className="space-y-1">
