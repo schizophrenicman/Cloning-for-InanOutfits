@@ -4,7 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Header({ onSignupClick }) {
   const [isClothingDropdownOpen, setIsClothingDropdownOpen] = useState(false);
+  const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
   const navigate = useNavigate();
+
+  const notifications = [
+    { id: 1, message: "New arrival: Summer dresses are here!", time: "2 hours ago" },
+    { id: 2, message: "Your order #1234 has been shipped.", time: "1 day ago" },
+    { id: 3, message: "Flash sale: 50% off on all accessories!", time: "3 days ago" },
+  ];
 
   const clothingCategories = [
     { name: "Tops", subcategories: ["T-Shirts", "Blouses", "Sweaters", "Tank Tops"] },
@@ -43,10 +50,30 @@ export default function Header({ onSignupClick }) {
 
           {/* RightIcon */}
           <div className="flex items-center space-x-2">
-            <button className="relative p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-            </button>
+            <div className="relative">
+              <button 
+                onClick={() => setIsNotificationDropdownOpen(!isNotificationDropdownOpen)}
+                className="relative p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110"
+              >
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+              </button>
+              {isNotificationDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg border border-amber-100 z-50">
+                  <div className="p-4">
+                    <h3 className="text-base font-semibold text-amber-900 mb-3">Notifications</h3>
+                    <ul className="max-h-60 overflow-y-auto">
+                      {notifications.map((notification) => (
+                        <li key={notification.id} className="mb-2 last:mb-0">
+                          <p className="text-sm text-amber-700">{notification.message}</p>
+                          <span className="text-xs text-amber-400">{notification.time}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
             <button 
               onClick={() => navigate('/cart')}
               className="p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110"
