@@ -91,13 +91,13 @@ export default function Header({ onSignupClick }) {
                 </div>
               )}
             </div>
-            <button 
+            <button
               onClick={() => navigate('/cart')}
               className="p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110"
             >
               <ShoppingCart className="w-5 h-5" />
             </button>
-            <button 
+            <button
               onClick={onSignupClick}
               className="p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110"
             >
@@ -179,8 +179,36 @@ export default function Header({ onSignupClick }) {
             >
               Sale
             </a>
-            <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">Brands</a>
-            <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">Customer Service</a>
+            <a
+              href="/brands"
+              className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/brands');
+              }}
+            >
+              Brands
+            </a>
+            <a
+              href="/customer-service"
+              className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/customer-service');
+              }}
+            >
+              Customer Service
+            </a>
+            <a
+              href="/admin"
+              className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/admin');
+              }}
+            >
+              Admin Panel
+            </a>
           </div>
         </nav>
       </div>

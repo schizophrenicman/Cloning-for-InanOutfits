@@ -7,6 +7,9 @@ import TrendingClothes from './components/TrendingClothes';
 import CartPage from './components/CartPage';
 import NewArrivals from './components/NewArrivals';
 import Sale from './components/Sale';
+import Brands from './components/Brands';
+import CustomerService from './components/CustomerService';
+import AdminPanel from './components/AdminPanel';
 
 function HomePage({ onSignupClick }) {
   return (
@@ -51,10 +54,26 @@ function App() {
             path="/sale"
             element={<Sale onSignupClick={handleSignupClick} />}
           />
+          <Route
+            path="/brands"
+            element={<Brands onSignupClick={handleSignupClick} />}
+          />
+          <Route
+            path="/customer-service"
+            element={<CustomerService onSignupClick={handleSignupClick} />}
+          />
+          <Route
+            path="/admin"
+            element={
+              <AdminPanel
+                onSignupClick={handleSignupClick}
+              />
+            }
+          />
         </Routes>
-        <SignupModal 
-          isOpen={isSignupModalOpen} 
-          onClose={handleCloseModal} 
+        <SignupModal
+          isOpen={isSignupModalOpen}
+          onClose={handleCloseModal}
         />
       </div>
     </Router>
