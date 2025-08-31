@@ -5,6 +5,8 @@ import SignupModal from './components/SignupModal';
 import HeroSection from './components/HeroSection';
 import TrendingClothes from './components/TrendingClothes';
 import CartPage from './components/CartPage';
+import NewArrivals from './components/NewArrivals';
+import Sale from './components/Sale';
 
 function HomePage({ onSignupClick }) {
   return (
@@ -33,13 +35,21 @@ function App() {
     <Router>
       <div className="min-h-screen bg-white">
         <Routes>
-          <Route 
-            path="/" 
-            element={<HomePage onSignupClick={handleSignupClick} />} 
+          <Route
+            path="/"
+            element={<HomePage onSignupClick={handleSignupClick} />}
           />
-          <Route 
-            path="/cart" 
-            element={<CartPage />} 
+          <Route
+            path="/cart"
+            element={<CartPage />}
+          />
+          <Route
+            path="/new-arrivals"
+            element={<NewArrivals onSignupClick={handleSignupClick} />}
+          />
+          <Route
+            path="/sale"
+            element={<Sale onSignupClick={handleSignupClick} />}
           />
         </Routes>
         <SignupModal 

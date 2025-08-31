@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Search, Bell, ShoppingCart, Globe, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header({ onSignupClick }) {
   const [isClothingDropdownOpen, setIsClothingDropdownOpen] = useState(false);
   const [isNotificationDropdownOpen, setIsNotificationDropdownOpen] = useState(false);
+  const notificationDropdownRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (notificationDropdownRef.current && !notificationDropdownRef.current.contains(event.target)) {
+        setIsNotificationDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const notifications = [
     { id: 1, message: "New arrival: Summer dresses are here!", time: "2 hours ago" },
@@ -31,9 +45,12 @@ export default function Header({ onSignupClick }) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-amber-700 to-orange-600 bg-clip-text text-transparent">
-              Inan outfits
-            </h1>
+            <button
+              onClick={() => navigate('/')}
+              className="text-2xl font-bold bg-gradient-to-r from-amber-700 to-orange-600 bg-clip-text text-transparent hover:from-amber-800 hover:to-orange-700 transition-all duration-200"
+            >
+              InanOutfits
+            </button>
           </div>
 
           {/* SearchBar */}
@@ -43,15 +60,15 @@ export default function Header({ onSignupClick }) {
               <input
                 type="text"
                 placeholder="Search"
-                className="w-full pl-10 pr-4 py-2 border border-amber-200 rounded-full focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all duration-200 bg-amber-50/50 text-amber-900 placeholder-amber-400 hover:bg-amber-100/50"
+                className="w-full pl-10 pr-4 py-2 border border-amber-200 rounded-full focus:ring-2 focus:ring-amber-400 focus:border-transparent focus:bg-amber-100 transition-all duration-200 bg-amber-50/50 text-amber-900 placeholder-amber-400 hover:bg-amber-100/50"
               />
             </div>
           </div>
 
           {/* RightIcon */}
           <div className="flex items-center space-x-2">
-            <div className="relative">
-              <button 
+            <div className="relative" ref={notificationDropdownRef}>
+              <button
                 onClick={() => setIsNotificationDropdownOpen(!isNotificationDropdownOpen)}
                 className="relative p-2 text-amber-600 hover:text-amber-800 transition-all duration-200 hover:scale-110"
               >
@@ -142,8 +159,26 @@ export default function Header({ onSignupClick }) {
                 </div>
               )}
             </div>
-            <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">New Arrivals</a>
-            <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">Sale</a>
+            <a 
+              href="/new-arrivals" 
+              className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/new-arrivals');
+              }}
+            >
+              New Arrivals
+            </a>
+            <a
+              href="/sale"
+              className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/sale');
+              }}
+            >
+              Sale
+            </a>
             <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">Brands</a>
             <a href="#" className="text-amber-700 hover:text-amber-900 transition-all duration-200 font-medium">Customer Service</a>
           </div>
