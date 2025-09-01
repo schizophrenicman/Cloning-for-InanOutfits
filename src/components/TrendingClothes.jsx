@@ -88,6 +88,8 @@ const TrendingClothes = () => {
     setIsAutoScrolling(true);
   };
 
+
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,9 +102,10 @@ const TrendingClothes = () => {
           </p>
         </div>
 
+
         <div 
           ref={scrollContainerRef}
-          className="relative overflow-x-auto scrollbar-hide"
+          className="relative overflow-x-hidden scrollbar-hide"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={{ scrollBehavior: 'smooth' }}

@@ -27,6 +27,26 @@ export default function CartPage() {
   const shipping = 499;
   const total = subtotal + shipping;
 
+  const orderHistory = [
+    {
+      id: 1,
+      date: "2025-10-15",
+      items: [
+        { name: "Premium Cotton T-Shirt", quantity: 1, price: 2999 },
+        { name: "Classic Denim Jeans", quantity: 1, price: 5999 }
+      ],
+      total: 8998
+    },
+    {
+      id: 2,
+      date: "2025-09-20",
+      items: [
+        { name: "Summer Dress", quantity: 2, price: 3999 }
+      ],
+      total: 7998
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
       <header className="bg-white/80 backdrop-blur-md shadow-sm border-b border-amber-100 sticky top-0 z-40">
@@ -137,6 +157,45 @@ export default function CartPage() {
             </div>
           </div>
         )}
+
+        {/* Order History */}
+        <div className="mt-12">
+          <div className="bg-white rounded-lg border border-amber-100 p-6">
+            <h2 className="text-xl font-semibold text-amber-900 mb-6">Order History</h2>
+
+            {orderHistory.length === 0 ? (
+              <p className="text-amber-600">No previous orders found.</p>
+            ) : (
+              <div className="space-y-6">
+                {orderHistory.map((order) => (
+                  <div key={order.id} className="border border-amber-100 rounded-lg p-4">
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <h3 className="font-medium text-amber-900">Order #{order.id}</h3>
+                        <p className="text-sm text-amber-600">Date: {order.date}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-semibold text-amber-700">Nrs {order.total}</p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      {order.items.map((item, index) => (
+                        <div key={index} className="flex justify-between items-center">
+                          <div className="flex-1">
+                            <span className="text-amber-900">{item.name}</span>
+                            <span className="text-sm text-amber-600 ml-2">Qty: {item.quantity}</span>
+                          </div>
+                          <span className="text-amber-700">Nrs {item.price * item.quantity}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </main>
     </div>
   );
